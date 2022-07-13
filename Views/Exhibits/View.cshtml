@@ -1,0 +1,91 @@
+@model farris_art_gallery.Models.Exhibit
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+<script type="importmap">
+    {
+        "imports": {
+        "three": "https://unpkg.com/three@0.142.0/build/three.module.js"
+        }
+    }
+</script>
+
+<style>
+    .full-screen {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 55px;
+        bottom: 0;
+    }
+</style>
+
+<div id="webglviewer" class="full-screen"></div>
+
+<script type="module">
+
+    import * as THREE from 'three';
+    import { OrbitControls } from 'https://unpkg.com/three@0.142.0/examples/jsm/controls/OrbitControls.js';
+
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.getElementById('webglviewer').appendChild(renderer.domElement);
+
+    var scene = new THREE.Scene();
+
+    var camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        1,
+        1000000
+    );
+    camera.position.set(0, 0, 0);
+    camera.lookAt(10, 0, 0);
+
+    var controls = new OrbitControls(camera, renderer.domElement);
+    controls.target.set(camera.position.x + .1, camera.position.y, camera.position.z);
+    controls.rotateSpeed = -0.15;
+    controls.enableDamping = true;
+
+    var loader = new THREE.TextureLoader();
+    loader.load(
+        '@("/img/" + Model.ImageName)',
+        function (texture) {
+            var sphereMaterial = new THREE.MeshBasicMaterial({
+                map: texture
+            });
+
+            var sphereGeometry = new THREE.SphereBufferGeometry(3, 32, 32);
+            sphereGeometry.scale(-1, 1, 1);
+            var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+   
+            scene.add(sphere);
+            renderer.render(scene, camera);
+        }
+    );
+    
+    
+
+    renderer.render(scene, camera);
+
+    animate();
+
+    function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
+    }
+
+    window.addEventListener('resize', onWindowResize, false);
+
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+</script>

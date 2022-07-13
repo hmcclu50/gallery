@@ -1,0 +1,46 @@
+@using Microsoft.AspNetCore.Identity
+@model IEnumerable<farris_art_gallery.Models.Exhibit>
+@inject SignInManager<IdentityUser> SignInManager
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="display-6 fw-bold text-primary">Exhibit Archive</h1>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <a asp-action="Create">Create New Exhibit</a>
+}
+
+<hr class="bg-primary" />
+<br/>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var item in Model)
+    {
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text">@item.Description</p>
+                    
+                    @if (!SignInManager.IsSignedIn(User))
+                    {
+                        <a asp-action="View" asp-route-id=@item.Id class="btn btn-primary">View Exhibit</a>
+                    }
+                    else
+                    {
+                        <a asp-action="View" asp-route-id=@item.Id class="card-link">View</a>
+                        <a asp-action="Edit" asp-route-id=@item.Id class="card-link">Edit</a>
+                        <a asp-action="Delete" asp-route-id=@item.Id class="card-link">Delete</a>
+                    }
+                </div>
+                <div class="card-footer bg-white">
+                    <small class="text-muted">Ended @item.EndDate.Date</small>
+                </div>
+            </div>
+        </div>
+    }
+</div>
