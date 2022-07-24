@@ -58,18 +58,21 @@ namespace farris_art_gallery.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,StartDate,EndDate,ImageFile")] Exhibit exhibit)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,EndDate,ThumbnailFile")] Exhibit exhibit)
         {
             if (ModelState.IsValid)
             {
-                string wwwRootPath = _hostEnvironment.WebRootPath;
-                string fileName = Path.GetFileNameWithoutExtension(exhibit.ImageFile.FileName);
-                string extension = Path.GetExtension(exhibit.ImageFile.FileName);
-                exhibit.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                string path = Path.Combine(wwwRootPath + "/img/" + fileName);
-                using (var fileStream = new FileStream(path, FileMode.Create))
+                if (exhibit.ThumbnailFile != null)
                 {
-                    await exhibit.ImageFile.CopyToAsync(fileStream);
+                    string wwwRootPath = _hostEnvironment.WebRootPath;
+                    string fileName = Path.GetFileNameWithoutExtension(exhibit.ThumbnailFile.FileName);
+                    string extension = Path.GetExtension(exhibit.ThumbnailFile.FileName);
+                    exhibit.ThumbnailName = fileName = "thumbnail-" + exhibit.Id + extension;
+                    string path = Path.Combine(wwwRootPath + "/img/" + fileName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await exhibit.ThumbnailFile.CopyToAsync(fileStream);
+                    }
                 }
                 _context.Add(exhibit);
                 await _context.SaveChangesAsync();
@@ -160,7 +163,7 @@ namespace farris_art_gallery.Controllers
             if (exhibit != null)
             {
                 _context.Exhibit.Remove(exhibit);
-                var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "img", exhibit.ImageName);
+                var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "img", exhibit.ThumbnailName);
                 if (System.IO.File.Exists(imagePath))
                 {
                     System.IO.File.Delete(imagePath);

@@ -23,22 +23,17 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StartDate" class="control-label"></label>
-                <input asp-for="StartDate" class="form-control" />
-                <span asp-validation-for="StartDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="EndDate" class="control-label"></label>
                 <input asp-for="EndDate" class="form-control" />
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ImageFile" class="control-label"></label>
+                <label asp-for="ThumbnailFile" class="control-label"></label>
                 <div class="custom-file">
-                    <input asp-for="ImageFile" class="custom-file-input" />
+                    <input asp-for="ThumbnailFile" class="custom-file-input" />
                     <label class="custom-file-label">Choose File</label>
                 </div>
-                <span asp-validation-for="ImageFile" class="text-danger"></span>
+                <span asp-validation-for="ThumbnailFile" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

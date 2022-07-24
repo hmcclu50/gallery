@@ -18,7 +18,7 @@
         position: absolute;
         left: 0;
         right: 0;
-        top: 55px;
+        top: 56px;
         bottom: 0;
     }
 </style>
@@ -26,17 +26,19 @@
 <div id="webglviewer" class="full-screen"></div>
 
 <script type="module">
-
     import * as THREE from 'three';
     import { OrbitControls } from 'https://unpkg.com/three@0.142.0/examples/jsm/controls/OrbitControls.js';
-
+    
+    // initializing renderer
+    
     var renderer = new THREE.WebGLRenderer();
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.getElementById('webglviewer').appendChild(renderer.domElement);
-
+    
+    // initializing scene and camera
+    
     var scene = new THREE.Scene();
-
     var camera = new THREE.PerspectiveCamera(
         75,
         window.innerWidth / window.innerHeight,
@@ -45,47 +47,90 @@
     );
     camera.position.set(0, 0, 0);
     camera.lookAt(10, 0, 0);
-
+    
+    // setting up mouse controls
+    
     var controls = new OrbitControls(camera, renderer.domElement);
     controls.target.set(camera.position.x + .1, camera.position.y, camera.position.z);
     controls.rotateSpeed = -0.15;
     controls.enableDamping = true;
-
-    var loader = new THREE.TextureLoader();
-    loader.load(
-        '@("/img/" + Model.ImageName)',
-        function (texture) {
-            var sphereMaterial = new THREE.MeshBasicMaterial({
-                map: texture
-            });
-
-            var sphereGeometry = new THREE.SphereBufferGeometry(3, 32, 32);
-            sphereGeometry.scale(-1, 1, 1);
-            var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-   
-            scene.add(sphere);
-            renderer.render(scene, camera);
-        }
-    );
     
-    
-
-    renderer.render(scene, camera);
-
     animate();
-
+        
     function animate() {
         requestAnimationFrame(animate);
         controls.update();
         renderer.render(scene, camera);
     }
-
-    window.addEventListener('resize', onWindowResize, false);
-
+    
+    // creating image viewer and adding initial background
+    
+    var backgroundUrl = '/img/test-01.jpg'; // temp init value
+    function loadSphere(url){
+      var loader = new THREE.TextureLoader();
+      loader.load(
+          url,
+          function (texture) {
+              var sphereMaterial = new THREE.MeshBasicMaterial({
+                  map: texture
+              });
+              var sphereGeometry = new THREE.SphereBufferGeometry(3, 32, 32);
+              sphereGeometry.scale(-1, 1, 1);
+              var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+              scene.add(sphere);
+          }
+      );  
+    }
+    loadSphere(backgroundUrl);
+    
+    // navigation buttons
+    
+    var navigationMaterial = new THREE.MeshBasicMaterial({
+        color: 0xffff00
+    });
+    var navigationGeometry = new THREE.SphereBufferGeometry(0.15, 32, 32);
+    
+    var navigationForward = new THREE.Mesh(navigationGeometry, navigationMaterial);
+    // var navigationBackward = new THREE.Mesh(navigationGeometry, navigationMaterial);
+    // var navigationLeft = new THREE.Mesh(navigationGeometry, navigationMaterial);
+    // var navigationRight = new THREE.Mesh(navigationGeometry, navigationMaterial);
+    
+    navigationForward.position.set(2.5,-1,0);
+    //navigationBackward.position.set(-2.5,-1,0);
+    //navigationLeft.position.set(0,-1,-2.5);
+    //navigationRight.position.set(0,-1,2.5);    
+    
+    scene.add(navigationForward);
+    // scene.add(navigationBackward);
+    //scene.add(navigationLeft);
+    //scene.add(navigationRight);
+    
+    renderer.render(scene, camera);
+        
+    var raycaster = new THREE.Raycaster();
+    var mouse = new THREE.Vector2();
+    function onMouseClick(event) {
+        raycaster.setFromCamera(mouse, camera);
+        var isIntersected = raycaster.intersectObject(navigationForward);
+         console.log("mouse x:" + mouse.x + ", y:" + mouse.y);
+         console.log("navigation x:" + navigationForward.position.x + ", y:" + navigationForward.position.y)
+        if (isIntersected.length > 0){
+            loadSphere('/img/test-02.jpeg'); // temp second value
+            renderer.render(scene, camera)            
+        }
+    }
+    window.addEventListener('mouseup', onMouseClick, false);
+    
+    function onMouseMove(event) {
+        mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+        mouse.y = - ( event.clientY / window.innerHeight) * 2 + 1 + 2 * (56 / window.innerHeight);
+    }
+    window.addEventListener('mousemove', onMouseMove,  false);
+    
     function onWindowResize() {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
-
+    window.addEventListener('resize', onWindowResize, false);
 </script>

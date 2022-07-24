@@ -11,4 +11,5 @@ public class ApplicationDbContext : IdentityDbContext
     {
     }
     public DbSet<farris_art_gallery.Models.Exhibit>? Exhibit { get; set; }
+    public DbSet<farris_art_gallery.Models.Image>? Image { get; set; }
 }
