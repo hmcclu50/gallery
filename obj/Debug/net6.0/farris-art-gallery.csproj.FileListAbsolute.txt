@@ -284,8 +284,6 @@
 /home/hunter/RiderProjects/farris-art-gallery/bin/Debug/net6.0/runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll
 /home/hunter/RiderProjects/farris-art-gallery/bin/Debug/net6.0/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll
 /home/hunter/RiderProjects/farris-art-gallery/bin/Debug/net6.0/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll
-/home/hunter/RiderProjects/farris-art-gallery/bin/Debug/net6.0/runtimes/win-arm/lib/net6.0/dotnet-aspnet-codegenerator-design.exe
-/home/hunter/RiderProjects/farris-art-gallery/bin/Debug/net6.0/runtimes/win-arm64/lib/net6.0/dotnet-aspnet-codegenerator-design.exe
 /home/hunter/RiderProjects/farris-art-gallery/bin/Debug/net6.0/runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll
 /home/hunter/RiderProjects/farris-art-gallery/bin/Debug/net6.0/runtimes/unix/lib/net6.0/System.Drawing.Common.dll
 /home/hunter/RiderProjects/farris-art-gallery/bin/Debug/net6.0/runtimes/win/lib/net6.0/System.Drawing.Common.dll
@@ -586,3 +584,5 @@
 /home/hunter/RiderProjects/gallery/obj/Debug/net6.0/ref/farris-art-gallery.dll
 /home/hunter/RiderProjects/gallery/bin/Debug/net6.0/package-lock.json
 /home/hunter/RiderProjects/gallery/bin/Debug/net6.0/package.json
+/home/hunter/RiderProjects/farris-art-gallery/bin/Debug/net6.0/package-lock.json
+/home/hunter/RiderProjects/farris-art-gallery/bin/Debug/net6.0/package.json

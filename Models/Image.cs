@@ -7,12 +7,11 @@ namespace farris_art_gallery.Models;
 public class Image
 {
     public int Id { get; set; }
-    [ValidateNever]
     public int Position { get; set; }
     [ValidateNever]
     public string ImageName { get; set; }
     [NotMapped]
     public IFormFile ImageFile { get; set; }
-    
+    [ValidateNever]
     public Exhibit Exhibit { get; set; }
 }

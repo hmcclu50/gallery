@@ -7,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" asp-route-ExhibitId="@Convert.ToInt32(TempData.Peek("ExhibitId"))">Create New</a>
 </p>
 <table class="table">
     <thead>
