@@ -10272,11 +10272,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/hunter/RiderProjects/farris-art-gallery/farris-art-gallery.csproj",
+      "projectUniqueName": "/home/hunter/RiderProjects/gallery/farris-art-gallery.csproj",
       "projectName": "farris-art-gallery",
-      "projectPath": "/home/hunter/RiderProjects/farris-art-gallery/farris-art-gallery.csproj",
+      "projectPath": "/home/hunter/RiderProjects/gallery/farris-art-gallery.csproj",
       "packagesPath": "/home/hunter/.nuget/packages/",
-      "outputPath": "/home/hunter/RiderProjects/farris-art-gallery/obj/",
+      "outputPath": "/home/hunter/RiderProjects/gallery/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/hunter/.nuget/NuGet/NuGet.Config"
@@ -10352,7 +10352,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.106/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/6.0.107/RuntimeIdentifierGraph.json"
       }
     }
   }

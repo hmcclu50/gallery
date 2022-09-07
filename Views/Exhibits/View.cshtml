@@ -29,6 +29,12 @@
     import * as THREE from 'three';
     import { OrbitControls } from 'https://unpkg.com/three@0.142.0/examples/jsm/controls/OrbitControls.js';
     
+    // tracker variables
+    
+    @{
+        int? position = 0;
+    }
+    
     // initializing renderer
     
     var renderer = new THREE.WebGLRenderer();
@@ -46,7 +52,7 @@
         1000000
     );
     camera.position.set(0, 0, 0);
-    camera.lookAt(10, 0, 0);
+    camera.lookAt(-10, 0, 0);
     
     // setting up mouse controls
     
@@ -61,11 +67,44 @@
         requestAnimationFrame(animate);
         controls.update();
         renderer.render(scene, camera);
-    }
+    }    
+    
+    // initialize navigation buttons
+    
+    var navigationMaterial = new THREE.MeshBasicMaterial({
+        color: 0xffff00
+    });
+    var navigationGeometry = new THREE.SphereBufferGeometry(0.15, 32, 32);
+    
+    var navigationForward = new THREE.Mesh(navigationGeometry, navigationMaterial);
+    var navigationBackward = new THREE.Mesh(navigationGeometry, navigationMaterial);
+    var navigationLeft = new THREE.Mesh(navigationGeometry, navigationMaterial);
+    var navigationRight = new THREE.Mesh(navigationGeometry, navigationMaterial);
+    
+    navigationForward.position.set(-2.5,-1,0);
+    navigationBackward.position.set(2.5,-1,0);
+    navigationLeft.position.set(0,-1,2.5);
+    navigationRight.position.set(0,-1,-2.5);
+    
+    var hasForward = @(Model.Images.FirstOrDefault(i => i.Position == position).Forward != null)
+    var hasBackward = @(Model.Images.FirstOrDefault(i => i.Position == position).Backward != null)
+    var hasLeft = @(Model.Images.FirstOrDefault(i => i.Position == position).Left != null)
+    var hasRight  = @(Model.Images.FirstOrDefault(i => i.Position == position).Right != null)
+    
+    if (!hasForward) navigationForward.visible = false;
+    if (!hasBackward) navigationBackward.visible = false;
+    if (!hasLeft) navigationLeft.visible = false;
+    if (!hasRight) navigationRight.visible = false;
+    
+    scene.add(navigationForward);
+    scene.add(navigationBackward);
+    scene.add(navigationLeft);
+    scene.add(navigationRight);
     
     // creating image viewer and adding initial background
     
-    var backgroundUrl = '/img/test-01.jpg'; // temp init value
+    var backgroundUrl = '@("/img/" + Model.Images.FirstOrDefault(i => i.Position == position).ImageName)'; // initializes to position 0
+        
     function loadSphere(url){
       var loader = new THREE.TextureLoader();
       loader.load(
@@ -83,54 +122,81 @@
     }
     loadSphere(backgroundUrl);
     
-    // navigation buttons
-    
-    var navigationMaterial = new THREE.MeshBasicMaterial({
-        color: 0xffff00
-    });
-    var navigationGeometry = new THREE.SphereBufferGeometry(0.15, 32, 32);
-    
-    var navigationForward = new THREE.Mesh(navigationGeometry, navigationMaterial);
-    // var navigationBackward = new THREE.Mesh(navigationGeometry, navigationMaterial);
-    // var navigationLeft = new THREE.Mesh(navigationGeometry, navigationMaterial);
-    // var navigationRight = new THREE.Mesh(navigationGeometry, navigationMaterial);
-    
-    navigationForward.position.set(2.5,-1,0);
-    //navigationBackward.position.set(-2.5,-1,0);
-    //navigationLeft.position.set(0,-1,-2.5);
-    //navigationRight.position.set(0,-1,2.5);    
-    
-    scene.add(navigationForward);
-    // scene.add(navigationBackward);
-    //scene.add(navigationLeft);
-    //scene.add(navigationRight);
-    
     renderer.render(scene, camera);
+    
+    // Events
         
     var raycaster = new THREE.Raycaster();
     var mouse = new THREE.Vector2();
     function onMouseClick(event) {
         raycaster.setFromCamera(mouse, camera);
-        var isIntersected = raycaster.intersectObject(navigationForward);
-         console.log("mouse x:" + mouse.x + ", y:" + mouse.y);
-         console.log("navigation x:" + navigationForward.position.x + ", y:" + navigationForward.position.y)
-        if (isIntersected.length > 0){
-            loadSphere('/img/test-02.jpeg'); // temp second value
-            renderer.render(scene, camera)            
+        if (raycaster.intersectObject(navigationForward).length > 0){
+            console.log("Forward Selected");
+            @(position = Model.Images.FirstOrDefault(i => i.Position == position).Forward);
         }
-    }
-    window.addEventListener('mouseup', onMouseClick, false);
-    
+        else if (raycaster.intersectObject(navigationBackward).length > 0){
+            console.log("Backward Selected");
+            @(position = Model.Images.FirstOrDefault(i => i.Position == position).Backward);
+        }
+        else if (raycaster.intersectObject(navigationLeft).length > 0){
+            console.log("Left Selected");          
+            @(position = Model.Images.FirstOrDefault(i => i.Position == position).Left);
+        }
+        else if (raycaster.intersectObject(navigationRight).length > 0){
+            console.log("Right Selected");          
+            @(position = Model.Images.FirstOrDefault(i => i.Position == position).Right);
+        }
+        
+        hasForward = @(Model.Images.FirstOrDefault(i => i.Position == position).Forward != null);
+        hasBackward = @(Model.Images.FirstOrDefault(i => i.Position == position).Backward != null);
+        hasLeft = @(Model.Images.FirstOrDefault(i => i.Position == position).Left != null);
+        hasRight  = @(Model.Images.FirstOrDefault(i => i.Position == position).Right != null);
+        
+        if (hasForward){
+            navigationForward.visible = true;
+        }
+        else{
+            navigationForward.visible = false;
+        }
+        
+        if (hasBackward){
+            navigationBackward.visible = true;
+        }
+        else{
+            navigationBackward.visible = false;
+        }
+        
+        if (hasLeft){
+            navigationLeft.visible = true;
+        }
+        else{
+            navigationLeft.visible = false;
+        }
+        
+        if (hasRight){
+            navigationRight.visible = true;
+        }
+        else{
+            navigationRight.visible = false;
+        }
+        
+        backgroundUrl = '@("/img/" + Model.Images.FirstOrDefault(i => i.Position == position).ImageName)';
+        loadSphere(backgroundUrl);
+        
+        renderer.render(scene, camera);
+    }    
     function onMouseMove(event) {
         mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
         mouse.y = - ( event.clientY / window.innerHeight) * 2 + 1 + 2 * (56 / window.innerHeight);
     }
-    window.addEventListener('mousemove', onMouseMove,  false);
     
     function onWindowResize() {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
+    
+    window.addEventListener('mouseup', onMouseClick, false);
+    window.addEventListener('mousemove', onMouseMove,  false);
     window.addEventListener('resize', onWindowResize, false);
 </script>

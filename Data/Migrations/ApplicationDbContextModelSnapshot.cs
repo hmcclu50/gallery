@@ -17,6 +17,52 @@ namespace farris_art_gallery.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.7");
 
+            modelBuilder.Entity("farris_art_gallery.Models.Artist", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Biography")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("WebsiteUrl")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Artist", (string)null);
+                });
+
+            modelBuilder.Entity("farris_art_gallery.Models.Artwork", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ThumbnailName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Artwork", (string)null);
+                });
+
             modelBuilder.Entity("farris_art_gallery.Models.Exhibit", b =>
                 {
                     b.Property<int>("Id")
@@ -42,20 +88,58 @@ namespace farris_art_gallery.Data.Migrations
                     b.ToTable("Exhibit", (string)null);
                 });
 
+            modelBuilder.Entity("farris_art_gallery.Models.Fact", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ArtistId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ArtworkId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ExhibitId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArtistId");
+
+                    b.HasIndex("ArtworkId");
+
+                    b.HasIndex("ExhibitId");
+
+                    b.ToTable("Fact", (string)null);
+                });
+
             modelBuilder.Entity("farris_art_gallery.Models.Image", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("Backward")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("ExhibitId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("Forward")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ImageName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("Left")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Position")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("Right")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -261,6 +345,33 @@ namespace farris_art_gallery.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("farris_art_gallery.Models.Fact", b =>
+                {
+                    b.HasOne("farris_art_gallery.Models.Artist", "Artist")
+                        .WithMany("Facts")
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("farris_art_gallery.Models.Artwork", "Artwork")
+                        .WithMany("Facts")
+                        .HasForeignKey("ArtworkId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("farris_art_gallery.Models.Exhibit", "Exhibit")
+                        .WithMany("Facts")
+                        .HasForeignKey("ExhibitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Artist");
+
+                    b.Navigation("Artwork");
+
+                    b.Navigation("Exhibit");
+                });
+
             modelBuilder.Entity("farris_art_gallery.Models.Image", b =>
                 {
                     b.HasOne("farris_art_gallery.Models.Exhibit", "Exhibit")
@@ -323,8 +434,20 @@ namespace farris_art_gallery.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("farris_art_gallery.Models.Artist", b =>
+                {
+                    b.Navigation("Facts");
+                });
+
+            modelBuilder.Entity("farris_art_gallery.Models.Artwork", b =>
+                {
+                    b.Navigation("Facts");
+                });
+
             modelBuilder.Entity("farris_art_gallery.Models.Exhibit", b =>
                 {
+                    b.Navigation("Facts");
+
                     b.Navigation("Images");
                 });
 #pragma warning restore 612, 618

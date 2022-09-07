@@ -38,7 +38,30 @@ namespace farris_art_gallery.Controllers
             }
 
             var exhibit = await _context.Exhibit
+                .Include(m => m.Images)
                 .FirstOrDefaultAsync(m => m.Id == id);
+            if (exhibit == null)
+            {
+                return NotFound();
+            }
+
+            return View(exhibit);
+        }
+        
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.Exhibit == null)
+            {
+                return NotFound();
+            }
+
+            var exhibit = await _context.Exhibit
+                .Include(e => e.Facts)
+                .ThenInclude(f => f.Artist)
+                .Include(e =>e.Facts)
+                .ThenInclude(f => f.Artwork)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            
             if (exhibit == null)
             {
                 return NotFound();
@@ -67,7 +90,7 @@ namespace farris_art_gallery.Controllers
                     string wwwRootPath = _hostEnvironment.WebRootPath;
                     string fileName = Path.GetFileNameWithoutExtension(exhibit.ThumbnailFile.FileName);
                     string extension = Path.GetExtension(exhibit.ThumbnailFile.FileName);
-                    exhibit.ThumbnailName = fileName = "thumbnail-" + exhibit.Id + extension;
+                    exhibit.ThumbnailName = fileName = "exhibit-thumbnail-" + exhibit.Id + extension;
                     string path = Path.Combine(wwwRootPath + "/img/" + fileName);
                     using (var fileStream = new FileStream(path, FileMode.Create))
                     {
@@ -163,10 +186,13 @@ namespace farris_art_gallery.Controllers
             if (exhibit != null)
             {
                 _context.Exhibit.Remove(exhibit);
-                var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "img", exhibit.ThumbnailName);
-                if (System.IO.File.Exists(imagePath))
+                if (exhibit.ThumbnailName != null)
                 {
-                    System.IO.File.Delete(imagePath);
+                    var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "img", exhibit.ThumbnailName);
+                    if (System.IO.File.Exists(imagePath))
+                    {
+                        System.IO.File.Delete(imagePath);
+                    }
                 }
             }
             

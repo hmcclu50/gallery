@@ -26,7 +26,7 @@ namespace farris_art_gallery
         {
             TempData["ExhibitId"] = ExhibitId;
             return _context.Image.Where(i => i.Exhibit.Id == ExhibitId) != null ? 
-                      View(await _context.Image.ToListAsync()) :
+                      View(await _context.Image.Where(i => i.Exhibit.Id == ExhibitId).ToListAsync()) :
                       Problem("Entity set 'ApplicationDbContext.Image'  is null.");
         }
 
@@ -61,9 +61,8 @@ namespace farris_art_gallery
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Position,ImageFile")] Image image)
+        public async Task<IActionResult> Create([Bind("Id,Position,Forward,Backward,Left,Right,ImageFile")] Image image, int ExhibitId)
         {
-            int ExhibitId = Convert.ToInt32(TempData["ExhibitId"]);
             Exhibit targetExhibit = _context.Exhibit.FirstOrDefault(e => e.Id == ExhibitId);
             image.Exhibit = targetExhibit;
             if (ModelState.IsValid)
@@ -81,7 +80,7 @@ namespace farris_art_gallery
                 _context.Add(image);
                 targetExhibit.Images.Add(image);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(controllerName: "Images", actionName: "Index", routeValues: new { ExhibitId = Convert.ToInt32(TempData["ExhibitId"]) });
             }
             return View(image);
         }
@@ -107,7 +106,7 @@ namespace farris_art_gallery
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Position,ImageName")] Image image)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Exhibit,Position,Forward,Backward,Left,Right,ImageName")] Image image)
         {
             if (id != image.Id)
             {
@@ -132,7 +131,7 @@ namespace farris_art_gallery
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(controllerName: "Images", actionName: "Index", routeValues: new { ExhibitId = Convert.ToInt32(TempData["ExhibitId"]) });
             }
             return View(image);
         }
@@ -169,10 +168,18 @@ namespace farris_art_gallery
             if (image != null)
             {
                 _context.Image.Remove(image);
+                if (image.ImageName != null)
+                {
+                    var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "img", image.ImageName);
+                    if (System.IO.File.Exists(imagePath))
+                    {
+                        System.IO.File.Delete(imagePath);
+                    }
+                }
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(controllerName: "Images", actionName: "Index", routeValues: new { ExhibitId = Convert.ToInt32(ViewData["ExhibitId"]) });
         }
 
         private bool ImageExists(int id)

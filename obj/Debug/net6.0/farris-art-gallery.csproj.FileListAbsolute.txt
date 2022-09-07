@@ -578,7 +578,6 @@
 /home/hunter/RiderProjects/gallery/obj/Debug/net6.0/scopedcss/projectbundle/farris-art-gallery.bundle.scp.css
 /home/hunter/RiderProjects/gallery/obj/Debug/net6.0/farris-art-gallery.csproj.CopyComplete
 /home/hunter/RiderProjects/gallery/obj/Debug/net6.0/farris-art-gallery.dll
-/home/hunter/RiderProjects/gallery/obj/Debug/net6.0/refint/farris-art-gallery.dll
 /home/hunter/RiderProjects/gallery/obj/Debug/net6.0/farris-art-gallery.pdb
 /home/hunter/RiderProjects/gallery/obj/Debug/net6.0/farris-art-gallery.genruntimeconfig.cache
 /home/hunter/RiderProjects/gallery/obj/Debug/net6.0/ref/farris-art-gallery.dll
@@ -586,3 +585,4 @@
 /home/hunter/RiderProjects/gallery/bin/Debug/net6.0/package.json
 /home/hunter/RiderProjects/farris-art-gallery/bin/Debug/net6.0/package-lock.json
 /home/hunter/RiderProjects/farris-art-gallery/bin/Debug/net6.0/package.json
+/home/hunter/RiderProjects/gallery/bin/Debug/net6.0/ref/farris-art-gallery.dll

@@ -8,9 +8,13 @@ public class Image
 {
     public int Id { get; set; }
     public int Position { get; set; }
+    public int? Forward { get; set; }
+    public int? Backward { get; set; }
+    public int? Left { get; set; }
+    public int? Right { get; set; }
     [ValidateNever]
     public string ImageName { get; set; }
-    [NotMapped]
+    [NotMapped, ValidateNever]
     public IFormFile ImageFile { get; set; }
     [ValidateNever]
     public Exhibit Exhibit { get; set; }
