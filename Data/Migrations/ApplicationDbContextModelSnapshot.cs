@@ -37,7 +37,7 @@ namespace farris_art_gallery.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Artist", (string)null);
+                    b.ToTable("Artist");
                 });
 
             modelBuilder.Entity("farris_art_gallery.Models.Artwork", b =>
@@ -60,7 +60,7 @@ namespace farris_art_gallery.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Artwork", (string)null);
+                    b.ToTable("Artwork");
                 });
 
             modelBuilder.Entity("farris_art_gallery.Models.Exhibit", b =>
@@ -85,7 +85,7 @@ namespace farris_art_gallery.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Exhibit", (string)null);
+                    b.ToTable("Exhibit");
                 });
 
             modelBuilder.Entity("farris_art_gallery.Models.Fact", b =>
@@ -111,7 +111,7 @@ namespace farris_art_gallery.Data.Migrations
 
                     b.HasIndex("ExhibitId");
 
-                    b.ToTable("Fact", (string)null);
+                    b.ToTable("Fact");
                 });
 
             modelBuilder.Entity("farris_art_gallery.Models.Image", b =>
@@ -120,33 +120,33 @@ namespace farris_art_gallery.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("Backward")
+                    b.Property<int?>("EastId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("ExhibitId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("Forward")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ImageName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("Left")
+                    b.Property<int>("IsStart")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Position")
+                    b.Property<int?>("NorthId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("Right")
+                    b.Property<int?>("SouthId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("WestId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ExhibitId");
 
-                    b.ToTable("Image", (string)null);
+                    b.ToTable("Image");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
