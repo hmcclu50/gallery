@@ -7,11 +7,17 @@ namespace farris_art_gallery.Models;
 public class Image
 {
     public int Id { get; set; }
-    public int Position { get; set; }
-    public int? Forward { get; set; }
-    public int? Backward { get; set; }
-    public int? Left { get; set; }
-    public int? Right { get; set; }
+    
+    public int IsStart { get; set; }
+    
+    public int? NorthId { get; set; }
+    
+    public int? SouthId { get; set; }
+    
+    public int? EastId { get; set; }
+    
+    public int? WestId { get; set; }
+    
     [ValidateNever]
     public string ImageName { get; set; }
     [NotMapped, ValidateNever]

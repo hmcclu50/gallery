@@ -52,7 +52,7 @@ namespace farris_art_gallery
         // GET: Images/Create
         public IActionResult Create(int ExhibitId)
         {
-            ViewData["ExhibitId"] = ExhibitId;
+            TempData["ExhibitId"] = ExhibitId;
             return View();
         }
 
@@ -61,8 +61,9 @@ namespace farris_art_gallery
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Position,Forward,Backward,Left,Right,ImageFile")] Image image, int ExhibitId)
+        public async Task<IActionResult> Create([Bind("Id,IsStart,NorthId,SouthId,EastId,WestId,ImageFile")] Image image)
         {
+            int ExhibitId = Convert.ToInt32(TempData["ExhibitId"]);
             Exhibit targetExhibit = _context.Exhibit.FirstOrDefault(e => e.Id == ExhibitId);
             image.Exhibit = targetExhibit;
             if (ModelState.IsValid)
@@ -70,7 +71,7 @@ namespace farris_art_gallery
                 string wwwRootPath = _hostEnvironment.WebRootPath;
                 string fileName = Path.GetFileNameWithoutExtension(image.ImageFile.FileName);
                 string extension = Path.GetExtension(image.ImageFile.FileName);
-                image.ImageName = fileName = "image-" + ExhibitId + "-" + image.Position + extension;
+                image.ImageName = fileName = "image-" + ExhibitId + "-" + DateTime.Now.ToString("yyyyMMddHHmmss") + extension;
                 string path = Path.Combine(wwwRootPath + "/img/" + fileName);
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
@@ -106,7 +107,7 @@ namespace farris_art_gallery
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Exhibit,Position,Forward,Backward,Left,Right,ImageName")] Image image)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Exhibit,IsStart,NorthId,SouthId,EastId,WestId,ImageName")] Image image)
         {
             if (id != image.Id)
             {
