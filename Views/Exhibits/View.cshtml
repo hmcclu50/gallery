@@ -66,7 +66,7 @@
     // initialize navigation buttons
     
     var navigationMaterial = new THREE.MeshBasicMaterial({
-        color: 0xffff00
+        color: 0xffffff
     });
     var navigationGeometry = new THREE.SphereBufferGeometry(0.15, 32, 32);
     
@@ -118,6 +118,8 @@
     var raycaster = new THREE.Raycaster();
     var mouse = new THREE.Vector2();
     
+    // checks if nav button pressed, then updates background image and new nav setup after switching images
+    
     async function onMouseClick(event) {
         raycaster.setFromCamera(mouse, camera);
         if (raycaster.intersectObject(navigationNorth).length > 0){
@@ -147,39 +149,20 @@
     }    
     
     function updateVisibility(){
-        if (curImage.NorthId != null){
-            navigationNorth.visible = true;
-        }
-        else{
-            navigationNorth.visible = false;
-        }
-        
-        if (curImage.SouthId != null){
-            navigationSouth.visible = true;
-        }
-        else{
-            navigationSouth.visible = false;
-        }
-        
-        if (curImage.EastId != null){
-            navigationEast.visible = true;
-        }
-        else{
-            navigationEast.visible = false;
-        }
-        
-        if (curImage.WestId != null){
-            navigationWest.visible = true;
-        }
-        else{
-            navigationWest.visible = false;
-        }
+        curImage.NorthId != null ? navigationNorth.visible = true : navigationNorth.visible = false;
+        curImage.SouthId != null ? navigationSouth.visible = true : navigationSouth.visible = false;
+        curImage.EastId != null ? navigationEast.visible = true : navigationEast.visible = false;
+        curImage.WestId != null ? navigationWest.visible = true : navigationWest.visible = false;
     }
+    
+    // detecting mouse position
     
     function onMouseMove(event) {
         mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-        mouse.y = - ( event.clientY / window.innerHeight) * 2 + 1 + 2 * (56 / window.innerHeight);
+        mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1 + 2 * (56 / window.innerHeight); // accounts for 56 px header
     }
+    
+    // responsive design
     
     function onWindowResize() {
         camera.aspect = window.innerWidth / window.innerHeight;
@@ -187,14 +170,15 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
     
+    // pulling image data from DB
+    
     async function apiRequest(imageId){
         await fetch('/api/Image/' + imageId)
             .then((response) => response.json())
             .then((data) => {
                 curImage = data;
                 backgroundUrl = "/img/" + data.ImageName;
-            }
-        );
+            });
     }
     
     window.addEventListener('mouseup', onMouseClick, false);

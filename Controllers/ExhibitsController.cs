@@ -90,7 +90,7 @@ namespace farris_art_gallery.Controllers
                     string wwwRootPath = _hostEnvironment.WebRootPath;
                     string fileName = Path.GetFileNameWithoutExtension(exhibit.ThumbnailFile.FileName);
                     string extension = Path.GetExtension(exhibit.ThumbnailFile.FileName);
-                    exhibit.ThumbnailName = fileName = "exhibit-thumbnail-" + exhibit.Id + extension;
+                    exhibit.ThumbnailName = fileName = "exhibit-" + exhibit.Id + extension;
                     string path = Path.Combine(wwwRootPath + "/img/" + fileName);
                     using (var fileStream = new FileStream(path, FileMode.Create))
                     {

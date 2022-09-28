@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "T4g7NWsmc1S1HDqThp1TB2Et4Ng43y2PW1wsChKTmyw=",
+  "Hash": "2Yd3TmF378Y/PkFPHpzvJD/gw9lG5pt7aHqzAC+jviQ=",
   "Source": "farris-art-gallery",
   "BasePath": "_content/farris-art-gallery",
   "Mode": "Default",
@@ -1122,40 +1122,6 @@
       "OriginalItemSpec": "wwwroot/img/artwork-thumbnail-0.JPG"
     },
     {
-      "Identity": "/home/hunter/RiderProjects/gallery/wwwroot/img/image-0-0.JPG",
-      "SourceId": "farris-art-gallery",
-      "SourceType": "Discovered",
-      "ContentRoot": "/home/hunter/RiderProjects/gallery/wwwroot/",
-      "BasePath": "_content/farris-art-gallery",
-      "RelativePath": "img/image-0-0.JPG",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/img/image-0-0.JPG"
-    },
-    {
-      "Identity": "/home/hunter/RiderProjects/gallery/wwwroot/img/image-0-1.JPG",
-      "SourceId": "farris-art-gallery",
-      "SourceType": "Discovered",
-      "ContentRoot": "/home/hunter/RiderProjects/gallery/wwwroot/",
-      "BasePath": "_content/farris-art-gallery",
-      "RelativePath": "img/image-0-1.JPG",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/img/image-0-1.JPG"
-    },
-    {
       "Identity": "/home/hunter/RiderProjects/gallery/wwwroot/img/image-2-20220921031906.JPG",
       "SourceId": "farris-art-gallery",
       "SourceType": "Discovered",
@@ -1205,23 +1171,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/img/image-2-20220921031950.JPG"
-    },
-    {
-      "Identity": "/home/hunter/RiderProjects/gallery/wwwroot/img/image-3-0.JPG",
-      "SourceId": "farris-art-gallery",
-      "SourceType": "Discovered",
-      "ContentRoot": "/home/hunter/RiderProjects/gallery/wwwroot/",
-      "BasePath": "_content/farris-art-gallery",
-      "RelativePath": "img/image-3-0.JPG",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/img/image-3-0.JPG"
     },
     {
       "Identity": "/home/hunter/RiderProjects/gallery/wwwroot/js/site.js",
