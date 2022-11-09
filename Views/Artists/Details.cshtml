@@ -1,0 +1,61 @@
+@using Microsoft.AspNetCore.Identity
+@model farris_art_gallery.Models.Artist
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>@Html.DisplayFor(model => model.Name)</h1>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+    <br /><br />
+}
+
+<h4>Website: @Html.DisplayFor(model => model.WebsiteUrl)</h4>
+<h6>@Html.DisplayFor(model => model.Biography)</h6>
+
+<br />
+
+<h4>Artworks</h4>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+@foreach (var item in Model.Facts)
+{
+    <div class="col">
+        <div class="card">
+            <img src="@("/img/" + item.Artwork.ThumbnailName)">
+            <div class="card-body">
+                <h5 class="card-title">@item.Artwork.Name</h5>
+                <p class="card-text">@item.Artwork.Description</p>
+            </div>
+        </div>
+    </div>
+}
+</div>
+
+<br />
+
+<h4>Exhibits</h4>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+@foreach (var item in Model.Facts)
+{
+    <div class="col">
+        <div class="card">
+            @if (item.Exhibit.ThumbnailName != null)
+            {
+                <img src="@("/img/" + item.Exhibit.ThumbnailName)">
+            }
+            <div class="card-body">
+                <h5 class="card-title">@item.Exhibit.Name</h5>
+                <p class="card-text">@item.Exhibit.Description</p>
+                <a class="btn btn-secondary" asp-controller="Exhibits" asp-action="Details" asp-route-id="@item.Artwork.Id">Details</a>
+            </div>
+        </div>
+    </div>
+}
+</div>
