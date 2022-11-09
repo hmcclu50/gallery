@@ -1,62 +1,74 @@
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model farris_art_gallery.Models.Image
+@inject SignInManager<IdentityUser> SignInManager
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+@if (!SignInManager.IsSignedIn(User))
+{
+    <h4>You do not have permission to view this page.</h4>
+}
+else
+{
+    <h1>Details</h1>
+    
+    <div>
+        <h4>Image</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Id)
+            </dt>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IsStart)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IsStart)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NorthId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NorthId)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.SouthId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SouthId)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EastId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EastId)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.WestId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.WestId)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ImageName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ImageName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ImageFile)
+            </dt>
+            <dd class="col-sm-10">
+                <img src="@("/img/" + Model.ImageName)" style="max-width:40%">
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+    </div>
 
-<div>
-    <h4>Image</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.IsStart)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.IsStart)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NorthId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NorthId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SouthId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.SouthId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EastId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.EastId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.WestId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.WestId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ImageName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageFile)
-        </dt>
-        <dd class="col-sm-10">
-            <img src="@("/img/" + Model.ImageName)" style="max-width:40%">
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
-</div>
+}
+

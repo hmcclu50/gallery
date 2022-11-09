@@ -48,4 +48,8 @@
       <_ContentIncludedByDefault Remove="Views\Artists\Index.cshtml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Remove="Views\Subscriber\Edit.cshtml" />
+    </ItemGroup>
+
 </Project>

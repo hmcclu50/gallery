@@ -37,7 +37,7 @@ namespace farris_art_gallery.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Artist");
+                    b.ToTable("Artist", (string)null);
                 });
 
             modelBuilder.Entity("farris_art_gallery.Models.Artwork", b =>
@@ -60,7 +60,7 @@ namespace farris_art_gallery.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Artwork");
+                    b.ToTable("Artwork", (string)null);
                 });
 
             modelBuilder.Entity("farris_art_gallery.Models.Exhibit", b =>
@@ -85,7 +85,7 @@ namespace farris_art_gallery.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Exhibit");
+                    b.ToTable("Exhibit", (string)null);
                 });
 
             modelBuilder.Entity("farris_art_gallery.Models.Fact", b =>
@@ -111,7 +111,7 @@ namespace farris_art_gallery.Data.Migrations
 
                     b.HasIndex("ExhibitId");
 
-                    b.ToTable("Fact");
+                    b.ToTable("Fact", (string)null);
                 });
 
             modelBuilder.Entity("farris_art_gallery.Models.Image", b =>
@@ -146,7 +146,7 @@ namespace farris_art_gallery.Data.Migrations
 
                     b.HasIndex("ExhibitId");
 
-                    b.ToTable("Image");
+                    b.ToTable("Image", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

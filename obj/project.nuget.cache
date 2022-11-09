@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "1nipPJ5+GbYZzriOd6WANcGq3jry+mZGdEMQLUaW6P9w6q4N5j9NAweBPuKxuAiG7P0shtCoih//k4J0PctOPg==",
+  "dgSpecHash": "02Qno/vUGix5XBxolVR9QpdmmGpmYjY4AjvWKQ3APX31LITKbkd0z8zF6afNuPUB9fMiqoR8OqV1l4HNKs0NJA==",
   "success": true,
   "projectFilePath": "/home/hunter/RiderProjects/gallery/farris-art-gallery.csproj",
   "expectedPackageFiles": [
@@ -192,7 +192,8 @@
     "/home/hunter/.nuget/packages/system.threading.timer/4.3.0/system.threading.timer.4.3.0.nupkg.sha512",
     "/home/hunter/.nuget/packages/system.windows.extensions/6.0.0/system.windows.extensions.6.0.0.nupkg.sha512",
     "/home/hunter/.nuget/packages/system.xml.readerwriter/4.3.0/system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "/home/hunter/.nuget/packages/system.xml.xdocument/4.3.0/system.xml.xdocument.4.3.0.nupkg.sha512"
+    "/home/hunter/.nuget/packages/system.xml.xdocument/4.3.0/system.xml.xdocument.4.3.0.nupkg.sha512",
+    "/home/hunter/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.10/microsoft.aspnetcore.app.ref.6.0.10.nupkg.sha512"
   ],
   "logs": []
 }

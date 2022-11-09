@@ -1,0 +1,15 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    ViewData["Title"] = "References";
+}
+
+@if (!SignInManager.IsSignedIn(User))
+{
+    <h4>You do not have permission to view this page.</h4>
+}
+else
+{
+    <h4>Placeholder text</h4>
+}

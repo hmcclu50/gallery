@@ -59,6 +59,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXJ0d29ya3MvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/hunter/RiderProjects/gallery/Views/Emails/Send.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1haWxzL1NlbmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/hunter/RiderProjects/gallery/Views/Exhibits/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRXhoaWJpdHMvQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -107,6 +111,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/hunter/RiderProjects/gallery/Views/Home/References.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9SZWZlcmVuY2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/hunter/RiderProjects/gallery/Views/Images/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW1hZ2VzL0NyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -137,6 +145,26 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/home/hunter/RiderProjects/gallery/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/hunter/RiderProjects/gallery/Views/Subscriber/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3Vic2NyaWJlci9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/hunter/RiderProjects/gallery/Views/Subscriber/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3Vic2NyaWJlci9EZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/hunter/RiderProjects/gallery/Views/Subscriber/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3Vic2NyaWJlci9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/hunter/RiderProjects/gallery/Views/Subscriber/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3Vic2NyaWJlci9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/hunter/RiderProjects/gallery/Views/Subscriber/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3Vic2NyaWJlci9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/hunter/RiderProjects/gallery/Views/_ViewImports.cshtml]

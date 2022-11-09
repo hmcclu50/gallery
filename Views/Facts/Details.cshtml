@@ -1,18 +1,29 @@
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model farris_art_gallery.Models.Fact
+@inject SignInManager<IdentityUser> SignInManager
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+@if (!SignInManager.IsSignedIn(User))
+{
+    <h4>You do not have permission to view this page.</h4>
+}
+else
+{
+    <h1>Details</h1>
 
-<div>
-    <h4>Fact</h4>
-    <hr />
-    <dl class="row">
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <h4>Fact</h4>
+        <hr />
+        <dl class="row">
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>  
+}
+

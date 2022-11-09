@@ -1,49 +1,59 @@
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model farris_art_gallery.Models.Image
+@inject SignInManager<IdentityUser> SignInManager
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+@if (!SignInManager.IsSignedIn(User))
+{
+    <h4>You do not have permission to view this page.</h4>
+}
+else
+{
+    <h1>Edit</h1>
 
-<h4>Image</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <input type="hidden" asp-for="Exhibit" />
-            <input type="hidden" asp-for="ImageFile"/>
-            <input type="hidden" asp-for="ImageName" />
-            <div class="form-group">
-                <label asp-for="IsStart" class="control-label"></label>
-                <input asp-for="IsStart" class="form-control" />
-                <span asp-validation-for="IsStart" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NorthId" class="control-label"></label>
-                <input asp-for="NorthId" class="form-control" />
-                <span asp-validation-for="NorthId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SouthId" class="control-label"></label>
-                <input asp-for="SouthId" class="form-control" />
-                <span asp-validation-for="SouthId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EastId" class="control-label"></label>
-                <input asp-for="EastId" class="form-control" />
-                <span asp-validation-for="EastId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="WestId" class="control-label"></label>
-                <input asp-for="WestId" class="form-control" />
-                <span asp-validation-for="WestId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <h4>Image</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="Exhibit" />
+                <input type="hidden" asp-for="ImageFile"/>
+                <input type="hidden" asp-for="ImageName" />
+                <div class="form-group">
+                    <label asp-for="IsStart" class="control-label"></label>
+                    <input asp-for="IsStart" class="form-control" />
+                    <span asp-validation-for="IsStart" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NorthId" class="control-label"></label>
+                    <input asp-for="NorthId" class="form-control" />
+                    <span asp-validation-for="NorthId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SouthId" class="control-label"></label>
+                    <input asp-for="SouthId" class="form-control" />
+                    <span asp-validation-for="SouthId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EastId" class="control-label"></label>
+                    <input asp-for="EastId" class="form-control" />
+                    <span asp-validation-for="EastId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="WestId" class="control-label"></label>
+                    <input asp-for="WestId" class="form-control" />
+                    <span asp-validation-for="WestId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
+}
